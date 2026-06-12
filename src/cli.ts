@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { fileURLToPath } from 'url';
+import { exec } from 'child_process';
 
 const command = process.argv[2];
 
@@ -67,6 +68,13 @@ async function runInit(): Promise<void> {
     )
   );
   console.log('\nDone. Use crisp() in Claude Code to optimize your Fable 5 prompts.\n');
+
+  // Open welcome page in default browser
+  const welcomePath = path.join(__dirname, '..', 'welcome.html');
+  if (fs.existsSync(welcomePath)) {
+    const opener = process.platform === 'win32' ? 'start' : process.platform === 'darwin' ? 'open' : 'xdg-open';
+    exec(`${opener} "${welcomePath}"`);
+  }
 }
 
 async function runStats(): Promise<void> {

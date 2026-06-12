@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptWell — Quick Start</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .hero { margin-bottom: 48px; }
+    .badge {
+      display: inline-block;
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+      color: #68d391;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #f7fafc;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .tagline {
+      font-size: 18px;
+      color: #a0aec0;
+      line-height: 1.5;
+    }
+    .tagline strong { color: #e2e8f0; }
+
+    .section { margin-bottom: 40px; }
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 16px;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 20px 24px;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .flow-step .label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #718096;
+    }
+    .flow-step .value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+    .flow-step .cost {
+      font-size: 11px;
+      color: #68d391;
+    }
+    .arrow {
+      color: #4a5568;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .tools { display: flex; flex-direction: column; gap: 12px; }
+    .tool {
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .tool-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .tool-name {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 15px;
+      font-weight: 600;
+      color: #90cdf4;
+    }
+    .tool-desc {
+      font-size: 13px;
+      color: #718096;
+    }
+    .tool-body { font-size: 13px; color: #a0aec0; line-height: 1.6; }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+    .k { color: #b794f4; }   /* keyword / property */
+    .s { color: #68d391; }   /* string */
+    .n { color: #90cdf4; }   /* number */
+    .c { color: #718096; }   /* comment */
+
+    .score-guide {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 16px;
+      margin-top: 10px;
+    }
+    .score-range {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .score-label { font-size: 13px; color: #a0aec0; }
+    .green { color: #68d391; }
+    .yellow { color: #f6e05e; }
+    .orange { color: #f6ad55; }
+    .red { color: #fc8181; }
+
+    .tip {
+      background: #1a2332;
+      border: 1px solid #2b4a7a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #90cdf4;
+      line-height: 1.6;
+    }
+    .tip strong { color: #63b3ed; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #1a1f2e;
+      font-size: 12px;
+      color: #4a5568;
+      display: flex;
+      justify-content: space-between;
+    }
+    footer a { color: #4a5568; text-decoration: none; }
+    footer a:hover { color: #718096; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="hero">
+      <div class="badge">Setup complete</div>
+      <h1>You're ready to prompt well.</h1>
+      <p class="tagline">
+        PromptWell sits between you and Fable 5.<br>
+        <strong>Messy prompt in. Crisp prompt out. Fewer tokens burned.</strong>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>How it works</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="label">You</span>
+          <span class="value">Messy prompt</span>
+          <span class="cost">"fix the auth bug"</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-step">
+          <span class="label">Haiku 4.5</span>
+          <span class="value">crisp()</span>
+          <span class="cost">~$0.001</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-step">
+          <span class="label">Blueprint</span>
+          <span class="value">Crisp prompt</span>
+          <span class="cost">score + savings</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-step">
+          <span class="label">Fable 5</span>
+          <span class="value">Executes</span>
+          <span class="cost">no wasted tokens</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>The 3 tools</h2>
+      <div class="tools">
+
+        <div class="tool">
+          <div class="tool-header">
+            <span class="tool-name">crisp(task, context?)</span>
+            <span class="tool-desc">— optimize a prompt before Fable 5 sees it</span>
+          </div>
+          <div class="tool-body">
+            Call this whenever you're about to hand a vague task to Fable 5.
+            It returns a clean prompt, a disambiguation score, and an estimated token savings.
+          </div>
+          <pre><span class="c">// In Claude Code, call it as an MCP tool:</span>
+mcp__promptwell__crisp({
+  <span class="k">task</span>: <span class="s">"fix the auth bug"</span>,
+  <span class="k">context</span>: <span class="s">"Next.js app, JWT auth in src/lib/auth.ts"</span>  <span class="c">// optional</span>
+})
+
+<span class="c">// Returns:</span>
+{
+  <span class="k">crisp_prompt</span>: <span class="s">"Goal: Fix JWT token expiry handling...\n\nConstraints:\n- do not change token format\n..."</span>,
+  <span class="k">blueprint</span>: {
+    <span class="k">structural_goal</span>: <span class="s">"Fix JWT token expiry in auth middleware"</span>,
+    <span class="k">disambiguation_score</span>: <span class="n">72</span>,
+    <span class="k">what_was_vague</span>: [<span class="s">"no file path specified"</span>, <span class="s">"unclear which auth system"</span>]
+  },
+  <span class="k">estimated_token_savings</span>: <span class="s">"~2,880 tokens"</span>
+}</pre>
+          <div style="margin-top:12px">
+            <div class="score-guide">
+              <span class="score-range green">0–20</span><span class="score-label">Crystal clear — specific paths, measurable outcome</span>
+              <span class="score-range yellow">21–50</span><span class="score-label">Decent — goal clear, missing some context</span>
+              <span class="score-range orange">51–80</span><span class="score-label">Vague — common, fixable patterns</span>
+              <span class="score-range red">81–100</span><span class="score-label">Unusable — Fable 5 will guess major requirements</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool">
+          <div class="tool-header">
+            <span class="tool-name">score(...)</span>
+            <span class="tool-desc">— record what Fable 5 accomplished</span>
+          </div>
+          <div class="tool-body">
+            Call this after Fable 5 finishes. It saves the session to your history so PromptWell can track your improvement over time.
+          </div>
+          <pre>mcp__promptwell__score({
+  <span class="k">original_prompt</span>: <span class="s">"fix the auth bug"</span>,
+  <span class="k">disambiguation_score</span>: <span class="n">72</span>,          <span class="c">// from crisp()</span>
+  <span class="k">what_was_vague</span>: [<span class="s">"no file path specified"</span>],  <span class="c">// from crisp()</span>
+  <span class="k">result_summary</span>: <span class="s">"Fixed JWT expiry, all tests pass"</span>,
+  <span class="k">tokens_used</span>: <span class="n">4200</span>                  <span class="c">// optional</span>
+})</pre>
+        </div>
+
+        <div class="tool">
+          <div class="tool-header">
+            <span class="tool-name">stats()</span>
+            <span class="tool-desc">— see your prompting trends</span>
+          </div>
+          <div class="tool-body">
+            Shows your average disambiguation score over time, token savings, and the top patterns you repeat so you can fix them.
+          </div>
+          <pre>mcp__promptwell__stats()
+
+<span class="c">// Example output:</span>
+PromptWell Stats
+Sessions tracked: 24
+Avg disambiguation score: 48/100 (lower = crisper)
+7-day avg:  41/100
+30-day avg: 56/100
+Estimated tokens saved: ~38,400
+
+Top patterns to fix:
+  - no file path specified (seen 14x)
+  - no success criteria (seen 9x)
+  - unclear which system (seen 6x)</pre>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="tip">
+        <strong>Tip:</strong> The best time to call <code>crisp()</code> is right before you'd normally type a long, multi-sentence prompt to Fable 5.
+        If you can describe the task in one crisp sentence with a file path and a success criterion, you probably don't need it.
+        If you can't — you do.
+      </div>
+    </div>
+
+    <footer>
+      <span>PromptWell v0.1.0</span>
+      <span>
+        <a href="https://github.com/ApoorvKhanna/promptwell" target="_blank">github.com/ApoorvKhanna/promptwell</a>
+      </span>
+    </footer>
+
+  </div>
+</body>
+</html>
