@@ -67,15 +67,17 @@ async function runInit(): Promise<void> {
     const existing = fs.existsSync(mcpConfigPath)
       ? JSON.parse(fs.readFileSync(mcpConfigPath, 'utf-8'))
       : {};
-    existing.mcp_servers = existing.mcp_servers ?? {};
-    existing.mcp_servers.promptwell = { command: 'npx', args: ['promptwell'] };
+    existing.mcpServers = existing.mcpServers ?? {};
+    const cliPath = path.resolve(__dirname, '..', 'dist', 'cli.js');
+    existing.mcpServers.promptwell = { command: 'node', args: [cliPath] };
     fs.mkdirSync(path.dirname(mcpConfigPath), { recursive: true });
     fs.writeFileSync(mcpConfigPath, JSON.stringify(existing, null, 2));
     console.log(`MCP server added to ${mcpConfigPath}`);
     console.log('Restart Claude Code to pick it up.');
   } catch {
+    const cliPath = path.resolve(__dirname, '..', 'dist', 'cli.js');
     console.log('\nCould not auto-update MCP config. Add this manually to ~/.claude/mcp.json:');
-    console.log(JSON.stringify({ mcp_servers: { promptwell: { command: 'npx', args: ['promptwell'] } } }, null, 2));
+    console.log(JSON.stringify({ mcpServers: { promptwell: { command: 'node', args: [cliPath] } } }, null, 2));
   }
 
   console.log('\nYou\'re ready. Here\'s how to use it:\n');
