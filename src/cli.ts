@@ -3,6 +3,10 @@ import { input, password, select } from '@inquirer/prompts';
 import { writeConfig, configExists, CONFIG_PATH } from './config.js';
 import { computeStats } from './analytics.js';
 import { startServer } from './server.js';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import { fileURLToPath } from 'url';
 
 const command = process.argv[2];
 
@@ -41,11 +45,7 @@ async function runInit(): Promise<void> {
   writeConfig({ anthropic_api_key, effort, phase1_model: 'claude-haiku-4-5' });
 
   // Install SKILL.md to ~/.claude/skills/promptwell/
-  const fs = await import('fs');
-  const path = await import('path');
-  const os = await import('os');
-  const url = await import('url');
-  const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const skillSrc = path.join(__dirname, '..', 'SKILL.md');
   const skillDir = path.join(os.homedir(), '.claude', 'skills', 'promptwell');
   const skillDst = path.join(skillDir, 'SKILL.md');
@@ -53,6 +53,8 @@ async function runInit(): Promise<void> {
     fs.mkdirSync(skillDir, { recursive: true });
     fs.copyFileSync(skillSrc, skillDst);
     console.log(`\nSKILL.md installed to ${skillDst}`);
+  } else {
+    console.warn('Warning: SKILL.md not found — skill trigger file was not installed. This is a packaging issue; please report it.');
   }
 
   console.log(`Config saved to ${CONFIG_PATH}`);
