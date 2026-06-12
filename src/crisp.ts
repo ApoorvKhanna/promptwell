@@ -63,6 +63,10 @@ export async function crispPrompt(
     const text = response.content[0].type === 'text' ? response.content[0].text : '';
     try {
       blueprint = JSON.parse(text) as Blueprint;
+      // Normalize arrays in case model returns null/undefined
+      blueprint.constraints = Array.isArray(blueprint.constraints) ? blueprint.constraints : [];
+      blueprint.success_criteria = Array.isArray(blueprint.success_criteria) ? blueprint.success_criteria : [];
+      blueprint.what_was_vague = Array.isArray(blueprint.what_was_vague) ? blueprint.what_was_vague : [];
       break;
     } catch {
       if (attempt === 1) throw new Error('Failed to parse blueprint from Haiku response');
