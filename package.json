@@ -1,10 +1,10 @@
 {
   "name": "promptwell",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Prompt optimizer and coach for Claude Fable 5 — stop burning tokens on bad prompts",
   "type": "module",
   "bin": {
-    "promptwell": "./dist/cli.js"
+    "promptwell": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc && chmod +x dist/cli.js",
