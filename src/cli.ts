@@ -59,14 +59,24 @@ async function runInit(): Promise<void> {
   }
 
   console.log(`Config saved to ${CONFIG_PATH}`);
-  console.log('\nAdd to your Claude Code MCP config (~/.claude/mcp.json):');
-  console.log(
-    JSON.stringify(
-      { mcp_servers: { promptwell: { command: 'npx', args: ['promptwell'] } } },
-      null,
-      2
-    )
-  );
+
+  // Auto-install into ~/.claude/mcp.json
+  const mcpConfigPath = path.join(os.homedir(), '.claude', 'mcp.json');
+  try {
+    const existing = fs.existsSync(mcpConfigPath)
+      ? JSON.parse(fs.readFileSync(mcpConfigPath, 'utf-8'))
+      : {};
+    existing.mcp_servers = existing.mcp_servers ?? {};
+    existing.mcp_servers.promptwell = { command: 'npx', args: ['promptwell'] };
+    fs.mkdirSync(path.dirname(mcpConfigPath), { recursive: true });
+    fs.writeFileSync(mcpConfigPath, JSON.stringify(existing, null, 2));
+    console.log(`MCP server added to ${mcpConfigPath}`);
+    console.log('Restart Claude Code to pick it up.');
+  } catch {
+    console.log('\nCould not auto-update MCP config. Add this manually to ~/.claude/mcp.json:');
+    console.log(JSON.stringify({ mcp_servers: { promptwell: { command: 'npx', args: ['promptwell'] } } }, null, 2));
+  }
+
   console.log('\nDone. Use crisp() in Claude Code to optimize your Fable 5 prompts.\n');
 
   // Open welcome page in default browser

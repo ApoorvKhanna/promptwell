@@ -1,6 +1,6 @@
 {
   "name": "promptwell",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Prompt optimizer and coach for Claude Fable 5 — stop burning tokens on bad prompts",
   "type": "module",
   "bin": {
@@ -12,8 +12,18 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest"
   },
-  "files": ["dist", "SKILL.md", "welcome.html"],
-  "keywords": ["mcp", "fable5", "claude", "prompt-optimization", "ai"],
+  "files": [
+    "dist",
+    "SKILL.md",
+    "welcome.html"
+  ],
+  "keywords": [
+    "mcp",
+    "fable5",
+    "claude",
+    "prompt-optimization",
+    "ai"
+  ],
   "license": "MIT",
   "author": "Apoorv Khanna",
   "repository": {
