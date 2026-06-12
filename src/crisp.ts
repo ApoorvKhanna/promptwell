@@ -60,7 +60,10 @@ export async function crispPrompt(
       messages: [{ role: 'user', content: userMessage }],
     });
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : '';
+    const raw = response.content[0].type === 'text' ? response.content[0].text : '';
+    // Extract JSON object — handles markdown code fences and surrounding prose
+    const match = raw.match(/\{[\s\S]*\}/);
+    const text = match ? match[0] : raw;
     try {
       blueprint = JSON.parse(text) as Blueprint;
       // Normalize arrays in case model returns null/undefined
