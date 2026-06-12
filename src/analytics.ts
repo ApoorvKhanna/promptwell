@@ -3,6 +3,30 @@ import path from 'path';
 import { CONFIG_DIR } from './config.js';
 
 export const HISTORY_PATH = path.join(CONFIG_DIR, 'history.json');
+export const PENDING_PATH = path.join(CONFIG_DIR, 'pending.json');
+
+export interface PendingSession {
+  task: string;
+  disambiguation_score: number;
+  what_was_vague: string[];
+  crisp_prompt: string;
+  estimated_savings: number;
+  timestamp: string;
+}
+
+export function savePending(session: PendingSession): void {
+  fs.mkdirSync(CONFIG_DIR, { recursive: true });
+  fs.writeFileSync(PENDING_PATH, JSON.stringify(session, null, 2));
+}
+
+export function loadPending(): PendingSession | null {
+  if (!fs.existsSync(PENDING_PATH)) return null;
+  return JSON.parse(fs.readFileSync(PENDING_PATH, 'utf-8')) as PendingSession;
+}
+
+export function clearPending(): void {
+  if (fs.existsSync(PENDING_PATH)) fs.unlinkSync(PENDING_PATH);
+}
 
 export interface HistoryEntry {
   timestamp: string;
