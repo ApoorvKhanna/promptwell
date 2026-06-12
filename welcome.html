@@ -8,8 +8,8 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: #0f1117;
-      color: #e2e8f0;
+      background: #f8f9fb;
+      color: #1a202c;
       min-height: 100vh;
       padding: 48px 24px;
     }
@@ -18,9 +18,9 @@
     .hero { margin-bottom: 48px; }
     .badge {
       display: inline-block;
-      background: #1a1f2e;
-      border: 1px solid #2d3748;
-      color: #68d391;
+      background: #e6f4ea;
+      border: 1px solid #b7dfc0;
+      color: #276749;
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -32,16 +32,16 @@
     h1 {
       font-size: 36px;
       font-weight: 700;
-      color: #f7fafc;
+      color: #1a202c;
       line-height: 1.2;
       margin-bottom: 12px;
     }
     .tagline {
       font-size: 18px;
-      color: #a0aec0;
+      color: #4a5568;
       line-height: 1.5;
     }
-    .tagline strong { color: #e2e8f0; }
+    .tagline strong { color: #1a202c; }
 
     .section { margin-bottom: 40px; }
     h2 {
@@ -57,11 +57,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: #1a1f2e;
-      border: 1px solid #2d3748;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 20px 24px;
       flex-wrap: wrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
     .flow-step {
       display: flex;
@@ -73,29 +74,30 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #718096;
+      color: #a0aec0;
     }
     .flow-step .value {
       font-size: 14px;
       font-weight: 500;
-      color: #e2e8f0;
+      color: #1a202c;
     }
     .flow-step .cost {
       font-size: 11px;
-      color: #68d391;
+      color: #276749;
     }
     .arrow {
-      color: #4a5568;
+      color: #cbd5e0;
       font-size: 18px;
       flex-shrink: 0;
     }
 
     .tools { display: flex; flex-direction: column; gap: 12px; }
     .tool {
-      background: #1a1f2e;
-      border: 1px solid #2d3748;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
     .tool-header {
       display: flex;
@@ -107,30 +109,30 @@
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 15px;
       font-weight: 600;
-      color: #90cdf4;
+      color: #3182ce;
     }
     .tool-desc {
       font-size: 13px;
       color: #718096;
     }
-    .tool-body { font-size: 13px; color: #a0aec0; line-height: 1.6; }
+    .tool-body { font-size: 13px; color: #4a5568; line-height: 1.6; }
 
     pre {
-      background: #0d1117;
-      border: 1px solid #2d3748;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 16px 20px;
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 12px;
-      color: #e2e8f0;
+      color: #1a202c;
       overflow-x: auto;
       margin-top: 10px;
       line-height: 1.6;
     }
-    .k { color: #b794f4; }   /* keyword / property */
-    .s { color: #68d391; }   /* string */
-    .n { color: #90cdf4; }   /* number */
-    .c { color: #718096; }   /* comment */
+    .k { color: #6b46c1; }   /* keyword / property */
+    .s { color: #276749; }   /* string */
+    .n { color: #2b6cb0; }   /* number */
+    .c { color: #a0aec0; }   /* comment */
 
     .score-guide {
       display: grid;
@@ -144,33 +146,33 @@
       font-weight: 600;
       white-space: nowrap;
     }
-    .score-label { font-size: 13px; color: #a0aec0; }
-    .green { color: #68d391; }
-    .yellow { color: #f6e05e; }
-    .orange { color: #f6ad55; }
-    .red { color: #fc8181; }
+    .score-label { font-size: 13px; color: #4a5568; }
+    .green { color: #276749; }
+    .yellow { color: #b7791f; }
+    .orange { color: #c05621; }
+    .red { color: #c53030; }
 
     .tip {
-      background: #1a2332;
-      border: 1px solid #2b4a7a;
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
       border-radius: 8px;
       padding: 14px 18px;
       font-size: 13px;
-      color: #90cdf4;
+      color: #2c5282;
       line-height: 1.6;
     }
-    .tip strong { color: #63b3ed; }
+    .tip strong { color: #2b6cb0; }
 
     footer {
       margin-top: 48px;
       padding-top: 24px;
-      border-top: 1px solid #1a1f2e;
+      border-top: 1px solid #e2e8f0;
       font-size: 12px;
-      color: #4a5568;
+      color: #a0aec0;
       display: flex;
       justify-content: space-between;
     }
-    footer a { color: #4a5568; text-decoration: none; }
+    footer a { color: #a0aec0; text-decoration: none; }
     footer a:hover { color: #718096; }
   </style>
 </head>
@@ -189,15 +191,15 @@
     <div class="section">
       <h2>4 commands — that's it</h2>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="background:#0d1117;border:1px solid #2d3748;border-radius:8px;padding:14px 20px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.8;">
-          <span style="color:#718096"># 1. Set up once</span><br>
-          <span style="color:#68d391">npx promptwell init</span><br><br>
-          <span style="color:#718096"># 2. Before you talk to Fable 5 — paste the output in instead</span><br>
-          <span style="color:#68d391">npx promptwell crisp <span style="color:#f6e05e">"fix the login button not working on mobile"</span></span><br><br>
-          <span style="color:#718096"># 3. After Fable 5 finishes — record what happened</span><br>
-          <span style="color:#68d391">npx promptwell score</span><br><br>
-          <span style="color:#718096"># 4. See how you're improving over time</span><br>
-          <span style="color:#68d391">npx promptwell stats</span>
+        <div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:14px 20px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.8;">
+          <span style="color:#a0aec0"># 1. Set up once</span><br>
+          <span style="color:#276749">npx promptwell init</span><br><br>
+          <span style="color:#a0aec0"># 2. Before you talk to Fable 5 — paste the output in instead</span><br>
+          <span style="color:#276749">npx promptwell crisp <span style="color:#b7791f">"fix the login button not working on mobile"</span></span><br><br>
+          <span style="color:#a0aec0"># 3. After Fable 5 finishes — record what happened</span><br>
+          <span style="color:#276749">npx promptwell score</span><br><br>
+          <span style="color:#a0aec0"># 4. See how you're improving over time</span><br>
+          <span style="color:#276749">npx promptwell stats</span>
         </div>
       </div>
     </div>
