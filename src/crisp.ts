@@ -1,5 +1,10 @@
 import Anthropic from '@anthropic-ai/sdk';
 
+export interface ClarifyingQuestion {
+  about: string;
+  question: string;
+}
+
 export interface Blueprint {
   structural_goal: string;
   context: string;
@@ -7,6 +12,7 @@ export interface Blueprint {
   success_criteria: string[];
   disambiguation_score: number;
   what_was_vague: string[];
+  clarifying_questions: ClarifyingQuestion[];
 }
 
 export interface CrispResult {
@@ -26,7 +32,13 @@ Output ONLY valid JSON matching this exact schema:
   "constraints": ["array of strings — what must NOT be changed or broken"],
   "success_criteria": ["array of strings — how to verify completion"],
   "disambiguation_score": number from 0 to 100,
-  "what_was_vague": ["array of strings — specific things that were ambiguous or missing"]
+  "what_was_vague": ["array of strings — specific things that were ambiguous or missing"],
+  "clarifying_questions": [
+    {
+      "about": "short topic label (e.g. 'file path', 'browser', 'expected behavior')",
+      "question": "specific question to ask the user that would most reduce disambiguation"
+    }
+  ]
 }
 
 Disambiguation score guide:
@@ -39,7 +51,8 @@ Rules:
 - Do NOT add scope beyond what the user implied
 - Do NOT invent requirements
 - Only extract and structure what was already there
-- Output ONLY the JSON object, no preamble or explanation`;
+- Output ONLY the JSON object, no preamble or explanation
+- clarifying_questions: generate 1–3 task-specific questions targeting the highest-impact gaps from what_was_vague; use empty array if disambiguation_score < 30`;
 
 export async function crispPrompt(
   task: string,
@@ -70,6 +83,7 @@ export async function crispPrompt(
       blueprint.constraints = Array.isArray(blueprint.constraints) ? blueprint.constraints : [];
       blueprint.success_criteria = Array.isArray(blueprint.success_criteria) ? blueprint.success_criteria : [];
       blueprint.what_was_vague = Array.isArray(blueprint.what_was_vague) ? blueprint.what_was_vague : [];
+      blueprint.clarifying_questions = Array.isArray(blueprint.clarifying_questions) ? blueprint.clarifying_questions : [];
       break;
     } catch {
       if (attempt === 1) throw new Error('Failed to parse blueprint from Haiku response');

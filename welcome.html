@@ -220,6 +220,12 @@
         </div>
         <span class="arrow">→</span>
         <div class="flow-step">
+          <span class="label">Brainstorm</span>
+          <span class="value">Q&amp;A</span>
+          <span class="cost">skip any question</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-step">
           <span class="label">Blueprint</span>
           <span class="value">Crisp prompt</span>
           <span class="cost">score + savings</span>
@@ -317,6 +323,42 @@ Top patterns to fix:
     </div>
 
     <div class="section">
+      <h2>Using inside Claude Code</h2>
+      <div class="tool">
+        <div class="tool-header">
+          <span class="tool-name">MCP mode — no terminal needed</span>
+          <span class="tool-desc">— Claude Code calls PromptWell for you</span>
+        </div>
+        <div class="tool-body">
+          Once <code>npx promptwell init</code> runs, PromptWell is registered as an MCP server.
+          Claude Code can call it automatically — you never need to leave the chat.
+        </div>
+        <div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:14px 20px;font-size:13px;line-height:1.9;margin-top:12px;">
+          <span style="color:#a0aec0"># Trigger it explicitly:</span><br>
+          <span style="color:#1a202c">"crisp this before we start: fix the login button"</span><br>
+          <span style="color:#1a202c">"before you begin, run this through promptwell: [task]"</span><br>
+          <span style="color:#1a202c">"optimize my prompt: [task]"</span><br><br>
+          <span style="color:#a0aec0"># Or let SKILL.md auto-trigger when your prompt is vague:</span><br>
+          <span style="color:#1a202c">"fix the login bug"  →  Claude detects vagueness → calls crisp() automatically</span>
+        </div>
+        <div class="tool-body" style="margin-top:14px;">
+          <strong style="color:#1a202c;">Important:</strong> Claude Code can't ask you interactive questions the way the terminal can.
+          Pack your context into the message upfront — file path, expected vs actual behavior, constraints.
+          The more you give, the better the output.
+        </div>
+        <pre><span class="c">// Rich context = much better crisp prompt:</span>
+<span class="s">"crisp this: fix the login button in src/components/LoginButton.tsx —
+ it shows on iOS Safari but tap does nothing. Don't change the API contract."</span>
+
+<span class="c">// Claude Code routes it as:</span>
+mcp__promptwell__crisp({
+  <span class="k">task</span>: <span class="s">"fix the login button"</span>,
+  <span class="k">context</span>: <span class="s">"src/components/LoginButton.tsx, iOS Safari, tap has no effect"</span>
+})</pre>
+      </div>
+    </div>
+
+    <div class="section">
       <div class="tip">
         <strong>Tip:</strong> The best time to call <code>crisp()</code> is right before you'd normally type a long, multi-sentence prompt to Fable 5.
         If you can describe the task in one crisp sentence with a file path and a success criterion, you probably don't need it.
@@ -325,7 +367,7 @@ Top patterns to fix:
     </div>
 
     <footer>
-      <span>PromptWell v0.1.0</span>
+      <span>PromptWell v0.1.6</span>
       <span>
         <a href="https://github.com/ApoorvKhanna/promptwell" target="_blank">github.com/ApoorvKhanna/promptwell</a>
       </span>

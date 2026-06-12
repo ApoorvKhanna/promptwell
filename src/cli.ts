@@ -121,7 +121,7 @@ async function runCrisp(): Promise<void> {
     process.exit(1);
   }
   const config = readConfig();
-  console.log('\nCrisping your prompt...\n');
+  console.log('\nAnalyzing your prompt...\n');
 
   const result = await crispPrompt(task, config.anthropic_api_key, config.phase1_model);
   const { blueprint, crisp_prompt, estimated_token_savings } = result;
@@ -129,16 +129,36 @@ async function runCrisp(): Promise<void> {
   const label = score <= 20 ? 'crystal clear' : score <= 50 ? 'decent' : score <= 80 ? 'vague' : 'very vague';
   const bar = '─'.repeat(56);
 
-  console.log(bar);
-  console.log('Copy this to Fable 5:');
-  console.log(bar);
-  console.log(crisp_prompt);
-  console.log(bar);
+  // Show score + what was unclear before asking questions
   console.log(`Score: ${score}/100  (${label})`);
   if (blueprint.what_was_vague.length) {
     console.log('What was unclear:');
     for (const v of blueprint.what_was_vague) console.log(`  • ${v}`);
   }
+
+  // Brainstorm — ask targeted clarifying questions, user can skip each
+  const answered: Array<{ about: string; answer: string }> = [];
+  const questions = blueprint.clarifying_questions ?? [];
+  if (questions.length > 0) {
+    const n = questions.length;
+    console.log(`\nI have ${n} quick question${n > 1 ? 's' : ''} — answer what you know, press enter to skip any.\n`);
+    for (const q of questions) {
+      const answer = await input({ message: q.question });
+      if (answer.trim()) answered.push({ about: q.about, answer: answer.trim() });
+    }
+    console.log('');
+  }
+
+  // Build final prompt: base crisp prompt + any answers the user provided
+  const finalPrompt = answered.length
+    ? `${crisp_prompt}\n\nClarified details:\n${answered.map(a => `- ${a.about}: ${a.answer}`).join('\n')}`
+    : crisp_prompt;
+
+  console.log(bar);
+  console.log('Copy this to Fable 5:');
+  console.log(bar);
+  console.log(finalPrompt);
+  console.log(bar);
   console.log(`Estimated savings: ${estimated_token_savings}`);
   console.log('\nRun  npx promptwell score  after Fable 5 finishes to track your improvement.\n');
 
@@ -146,7 +166,7 @@ async function runCrisp(): Promise<void> {
     task,
     disambiguation_score: score,
     what_was_vague: blueprint.what_was_vague,
-    crisp_prompt,
+    crisp_prompt: finalPrompt,
     estimated_savings: estimateSavings(score),
     timestamp: new Date().toISOString(),
   });

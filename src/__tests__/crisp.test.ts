@@ -11,6 +11,9 @@ const mockBlueprint = {
   success_criteria: ['auth test suite passes'],
   disambiguation_score: 72,
   what_was_vague: ['no file path specified', 'unclear which auth system'],
+  clarifying_questions: [
+    { about: 'expiry behavior', question: 'Does the token expire too soon or too late?' },
+  ],
 };
 
 beforeEach(() => vi.resetAllMocks());
