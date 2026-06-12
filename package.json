@@ -15,6 +15,17 @@
   "files": ["dist", "SKILL.md"],
   "keywords": ["mcp", "fable5", "claude", "prompt-optimization", "ai"],
   "license": "MIT",
+  "author": "Apoorv Khanna",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ApoorvKhanna/promptwell.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": "./dist/server.js"
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "@inquirer/prompts": "^7.5.0",
